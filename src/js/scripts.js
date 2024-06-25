@@ -122,5 +122,46 @@ var renderRings = function () {
 
 
 
+    document.getElementById('search-button').addEventListener('click', function() {
+        // Simulação de chamada ao backend
+        // Aqui você faria uma chamada AJAX para obter os dados reais
+        // Exemplo:
+        // fetch('/api/search', {
+        //     method: 'POST',
+        //     body: JSON.stringify({ uf: selectedUF, municipio: selectedMunicipio }),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // }).then(response => response.json()).then(data => {
+        //     displayResults(data);
+        // });
+
+        // Simulação de dados de resposta
+        const data = [
+            { type: 'Radar', uf: 'SP', municipio: 'São Paulo', info: 'Radar fixo' },
+            { type: 'Concessionária', uf: 'SP', municipio: 'São Paulo', info: 'Concessionária XYZ' }
+        ];
+        displayResults(data);
+    });
+
+    function displayResults(data) {
+        const resultsContainer = document.getElementById('results-container');
+        const resultsContent = document.getElementById('results-content');
+        
+        resultsContent.innerHTML = ''; // Limpa os resultados anteriores
+
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'result-item';
+            div.innerHTML = `<strong>${item.type}</strong>: ${item.uf} - ${item.municipio} - ${item.info}`;
+            resultsContent.appendChild(div);
+        });
+
+        resultsContainer.style.display = 'block';
+    }
+
+
+
+
 
 
