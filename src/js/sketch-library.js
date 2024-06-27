@@ -4,7 +4,6 @@
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-stylish-portfolio/blob/master/LICENSE)
 */
 
-
 window.addEventListener('DOMContentLoaded', event => {
 
     const sidebarWrapper = document.getElementById('sidebar-wrapper');
@@ -167,7 +166,7 @@ var renderRings = function () {
 
     */
 
-/*
+
     document.getElementById('search-button').addEventListener('click', function() {
         // Obtenha a UF e o município selecionados
         const selectedUFRadar = document.getElementById('uf-select-radar').value;
@@ -212,7 +211,7 @@ var renderRings = function () {
         const jsonContent = document.getElementById('json-content');
         jsonContent.textContent = JSON.stringify(data, null, 2); // Exibe JSON formatado
     }
-
+    
 
 /*
 
@@ -256,4 +255,5 @@ var renderRings = function () {
     
     */
 
-    
+
+
