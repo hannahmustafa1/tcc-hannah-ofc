@@ -122,7 +122,7 @@ var renderRings = function () {
 
 
 
-    document.getElementById('search-button').addEventListener('click', function() {
+   /* document.getElementById('search-button').addEventListener('click', function() {
         // Simulação de chamada ao backend
         // Aqui você faria uma chamada AJAX para obter os dados reais
         // Exemplo:
@@ -161,7 +161,112 @@ var renderRings = function () {
     }
 
 
+    */
 
+/*
+    document.getElementById('search-button').addEventListener('click', function() {
+        // Obtenha a UF e o município selecionados
+        const selectedUF = document.getElementById('uf-select').value;
+        const selectedMunicipio = document.getElementById('municipio-select').value;
+    
+        // Chamada ao backend para o endpoint de radar
+        fetch(`https://government-reports.onrender.com/prfStation/radar?uf=${selectedUF}&municipio=${selectedMunicipio}`, {
+            method: 'GET',  // Método HTTP
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.text())  // Converte a resposta em texto
+        .then(data => {
+            // Converte os dados CSV em um objeto JavaScript
+            const rows = data.split('\n');
+            const jsonData = rows.map(row => {
+                const cells = row.split(',');
+                return { type: cells[0], uf: cells[1], municipio: cells[2], info: cells[3] };
+            });
+    
+            displayResults(jsonData);
+        });
+    
+        // Chamada ao backend para o endpoint de busca
+        fetch(`https://government-reports.onrender.com/prfStation/search?uf=${selectedUF}&municipio=${selectedMunicipio}`, {
+            method: 'GET',  // Método HTTP
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.text())  // Converte a resposta em texto
+        .then(data => {
+            // Converte os dados CSV em um objeto JavaScript
+            const rows = data.split('\n');
+            const jsonData = rows.map(row => {
+                const cells = row.split(',');
+                return { type: cells[0], uf: cells[1], municipio: cells[2], info: cells[3] };
+            });
+    
+            displayResults(jsonData);
+        });
+    });
+    
+    function displayResults(data) {
+        const resultsContainer = document.getElementById('results-container');
+        const resultsContent = document.getElementById('results-content');
+        
+        resultsContent.innerHTML = ''; // Limpa os resultados anteriores
+    
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'result-item';
+            div.innerHTML = `<strong>${item.type}</strong>: ${item.uf} - ${item.municipio} - ${item.info}`;
+            resultsContent.appendChild(div);
+        });
+    
+        resultsContainer.style.display = 'block';
+    }
+    
+    */
+
+
+
+
+    document.getElementById('search-button').addEventListener('click', function() {
+        // Obtenha a UF e o município selecionados
+        const selectedUFRadar = document.getElementById('uf-select-radar').value;
+        const selectedMunicipioRadar = document.getElementById('municipio-select-radar').value;
+        const selectedUFConcessionaria = document.getElementById('uf-select-concessionaria').value;
+        const selectedMunicipioConcessionaria = document.getElementById('municipio-select-concessionaria').value;
+    
+        // Chamada ao backend para o endpoint de radar
+        fetch(`https://government-reports.onrender.com/prfStation/radar?uf=${selectedUFRadar}&municipio=${selectedMunicipioRadar}`)
+            .then(response => response.json())  // Converte a resposta em JSON
+            .then(data => {
+                displayResults(data);
+            });
+    
+        // Chamada ao backend para o endpoint de busca
+        fetch(`https://government-reports.onrender.com/prfStation/search?uf=${selectedUFConcessionaria}&municipio=${selectedMunicipioConcessionaria}`)
+            .then(response => response.json())  // Converte a resposta em JSON
+            .then(data => {
+                displayResults(data);
+            });
+    });
+    
+    function displayResults(data) {
+        const resultsContainer = document.getElementById('results-container');
+        const resultsContent = document.getElementById('results-content');
+        
+        resultsContent.innerHTML = ''; // Limpa os resultados anteriores
+    
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'result-item';
+            div.innerHTML = `<strong>${item.type}</strong>: ${item.uf} - ${item.municipio} - ${item.info}`;
+            resultsContent.appendChild(div);
+        });
+    
+        resultsContainer.style.display = 'block';
+    }
+    
 
 
 
